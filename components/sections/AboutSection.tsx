@@ -6,10 +6,10 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 
 const stats = [
-  { value: "6+", label: "Years Experience" },
-  { value: "50+", label: "Projects Delivered" },
-  { value: "20+", label: "Happy Clients" },
-  { value: "3", label: "Open Source Libs" },
+  { value: "4+", label: "Years Experience" },
+  { value: "10+", label: "Projects Delivered" },
+  // { value: "10+", label: "Happy Clients" },
+  // { value: "3", label: "Open Source Libs" },
 ];
 
 function Interactive3DTag() {
@@ -90,7 +90,7 @@ function Interactive3DTag() {
           {/* Photo */}
           <div className="px-5 pb-4" style={{ transformStyle: "preserve-3d" }}>
             <motion.div
-              className="relative aspect-[4/5] rounded-2xl overflow-hidden"
+              className="relative aspect-4/5 rounded-2xl overflow-hidden"
               style={{
                 border: "2px solid var(--border)",
                 transform: "translateZ(30px)",

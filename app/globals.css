@@ -2,6 +2,7 @@
 
 @import "tailwindcss";
 @config "../tailwind.config.ts";
+@plugin "@tailwindcss/typography";
 
 @layer base {
   :root {
@@ -10,7 +11,7 @@
     --card: #ECEAE4;
     --border: #D8D4CC;
     --muted: #8C8882;
-    --accent: #E8FF47;
+    --accent: #a6be05;
   }
   .dark {
     --bg: #0D0D0F;
@@ -67,4 +68,70 @@
     transition: all 0.2s;
   }
   .tag:hover { border-color: var(--accent); color: var(--accent); }
+}
+
+@layer utilities {
+  .markdown-body {
+    color: var(--fg);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 {
+    color: var(--fg);
+    margin-top: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: 700;
+  }
+  .markdown-body h1 { font-size: 2em; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  .markdown-body h2 { font-size: 1.5em; border-bottom: 1px solid var(--border); padding-bottom: 0.3em; }
+  .markdown-body h3 { font-size: 1.25em; }
+  .markdown-body p, .markdown-body blockquote, .markdown-body ul, .markdown-body ol, .markdown-body dl, .markdown-body table, .markdown-body pre {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+  .markdown-body a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .markdown-body a:hover {
+    text-decoration: underline;
+  }
+  .markdown-body ul, .markdown-body ol {
+    padding-left: 2em;
+    list-style: disc;
+  }
+  .markdown-body ol {
+    list-style: decimal;
+  }
+  .markdown-body code {
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    background-color: var(--border);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .markdown-body pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #161618;
+    color: #F5F2ED;
+    border-radius: 6px;
+  }
+  .markdown-body pre code {
+    background-color: transparent;
+    padding: 0;
+    font-size: 100%;
+  }
+  .markdown-body blockquote {
+    padding: 0 1em;
+    color: var(--muted);
+    border-left: 0.25em solid var(--border);
+  }
+  .markdown-body img {
+    max-width: 100%;
+    box-sizing: content-box;
+  }
 }

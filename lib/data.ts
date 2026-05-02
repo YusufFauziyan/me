@@ -1,32 +1,32 @@
 export const projects = [
   {
     id: 1,
-    title: "NexCommerce",
-    description: "A full-featured e-commerce platform with real-time inventory, Stripe payments, and a headless CMS. Built for scale with microservices architecture.",
-    tech: ["Next.js", "TypeScript", "PostgreSQL", "Redis", "Stripe", "Docker"],
-    image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop",
-    demo: "#",
-    github: "#",
+    title: "YUMA AI",
+    description: "A premium, full-stack AI chatbot SaaS application powered by Google Gemini. Features real-time streaming responses, Google SSO authentication, multi-conversation support, and a beautiful landing page with smooth Framer Motion animations.",
+    tech: ["Next.js", "Express", "Tailwind", "MySQL", "Prisma", "Framer Motion", "Google Gemini", "Google SSO"],
+    image: "https://github.com/YusufFauziyan/yuma_ai/blob/main/frontend/public/screenshot-landing.png?raw=true",
+    demo: "https://yuma-ai-azure.vercel.app",
+    github: "https://github.com/YusufFauziyan/yuma_ai",
     featured: true,
   },
   {
     id: 2,
-    title: "FlowBoard",
-    description: "Real-time collaborative project management tool with Kanban boards, WebSocket sync, and AI-powered task prioritization.",
-    tech: ["React", "Node.js", "Socket.io", "MongoDB", "OpenAI"],
-    image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop",
-    demo: "#",
-    github: "#",
+    title: "YuBooth",
+    description: "YuBooth is a modern, scalable, and interactive photobooth system. It comes with a beautiful Next.js frontend and a robust Node.js + Prisma backend. You can use this platform to capture photos with friends, generate QR codes, save memories online, and even manage physical prints!",
+    tech: ["Next.js", "Express", "Tailwind", "MySQL", "Socket.IO", "Prisma", "Framer Motion", "Google SSO", "Cloudflare R2"],
+    image: "https://github.com/YusufFauziyan/YuBooth/blob/main/docs/landing.png?raw=true",
+    demo: "https://yu-booth.vercel.app",
+    github: "https://github.com/YusufFauziyan/YuBooth",
     featured: true,
   },
   {
     id: 3,
-    title: "DataPulse",
-    description: "Analytics dashboard with customizable widgets, data visualization, and automated reporting for SaaS businesses.",
-    tech: ["Next.js", "D3.js", "Express", "MySQL", "Chart.js"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
+    title: "Fix My Road",
+    description: "FixMyRoad is a distributed open-source project spanning across Mobile, Web, and backend Artificial Intelligence tailored for automated, real-time pothole detection on public roads.",
+    tech: ["Next.js", "Python", "TensorFlow", "Keras", "FastAPI", "PostgreSQL", "Flutter (Android/iOS)", "Cloudflare R2", "Yolo v8"],
+    image: "https://github.com/YusufFauziyan/fixmyroad/blob/main/docs/app-screenshot-1.png?raw=true",
     demo: "#",
-    github: "#",
+    github: "https://github.com/YusufFauziyan/fixmyroad",
     featured: false,
   },
   {
@@ -77,10 +77,10 @@ export const experiences = [
 ];
 
 export const skills = {
-  frontend: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "GraphQL"],
-  backend: ["Node.js", "Express", "Python", "REST APIs"],
-  database: ["PostgreSQL", "MySQL", "MongoDB", "Redis", "Prisma", "Supabase"],
-  devops: ["Docker"],
+  frontend: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux", "HTML", "CSS", "JavaScript"],
+  backend: ["Node.js", "Express", "Python", "REST APIs", "GraphQL", "Firebase", "Socket IO"],
+  database: ["PostgreSQL", "MySQL", "Prisma", "Supabase"],
+  mobile: ["Flutter"],
 };
 
 export const navLinks = [
