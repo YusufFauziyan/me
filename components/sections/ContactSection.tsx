@@ -50,7 +50,30 @@ export default function ContactSection() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1200));
+
+    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
+    const body = encodeURIComponent(
+      [
+        `Hi, you have a new message from your portfolio.`,
+        ``,
+        `───────────────────────────`,
+        `  CONTACT DETAILS`,
+        `───────────────────────────`,
+        `  Name    : ${form.name}`,
+        `  Email   : ${form.email}`,
+        `───────────────────────────`,
+        `  MESSAGE`,
+        `───────────────────────────`,
+        `  ${form.message}`,
+        `───────────────────────────`,
+        ``,
+        `This message was sent via your portfolio contact form.`,
+      ].join("\n"),
+    );
+
+    window.location.href = `mailto:${emailAddress || ""}?subject=${subject}&body=${body}`;
+
+    await new Promise((r) => setTimeout(r, 800));
     setLoading(false);
     setSent(true);
   };
@@ -102,14 +125,14 @@ export default function ContactSection() {
                   style={{ color: "var(--muted)" }}
                 >
                   <MapPin size={14} style={{ color: "var(--accent)" }} />
-                  San Francisco, CA (Remote OK)
+                  Jakarta, Indonesia (Remote OK)
                 </div>
                 <div
                   className="flex items-center gap-3 text-sm"
                   style={{ color: "var(--muted)" }}
                 >
                   <Clock size={14} style={{ color: "var(--accent)" }} />
-                  PST (UTC-8) — Usually responds same day
+                  WIB (UTC+7) — Usually responds same day
                 </div>
               </div>
               <div className="space-y-3">
