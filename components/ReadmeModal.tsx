@@ -172,7 +172,7 @@ export default function ReadmeModal({
                 <span className="hidden sm:inline">GitHub</span>
               </a>
 
-              {demoUrl && (
+              {demoUrl && demoUrl !== "#" && (
                 <a
                   href={demoUrl}
                   target="_blank"

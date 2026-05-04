@@ -49,6 +49,16 @@ export const projects = [
     github: "https://github.com/YusufFauziyan/NikahIn",
     featured: true,
   },
+  {
+    id: 6,
+    title: "AttendEase",
+    description: "AttendEase is an employee attendance web application directly integrated with Google Sheets. This application automatically records and sends employee attendance data to a Google Sheet in real-time.",
+    tech: ["Next.js", "Tailwind", "Google Sheets"],
+    image: "https://github.com/YusufFauziyan/attendance-nextjs/blob/main/public/screnshoot-landing.png?raw=true",
+    demo: "",
+    github: "https://github.com/YusufFauziyan/attendance-nextjs",
+    featured: true,
+  },
 ];
 
 export const experiences = [

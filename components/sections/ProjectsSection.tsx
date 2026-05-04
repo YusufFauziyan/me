@@ -88,7 +88,7 @@ function ProjectCard({
           )}
           {/* Hover overlay actions */}
           <div className="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            {project.demo !== "#" && (
+            {project.demo !== "#" && project.demo && (
               <motion.a
                 href={project.demo}
                 target="_blank"
