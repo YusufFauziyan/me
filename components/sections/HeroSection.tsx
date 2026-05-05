@@ -6,6 +6,7 @@ import { GithubIcon, LinkedinIcon } from "@/components/Icons";
 import { socialMedia } from "@/lib/data";
 
 const D = 1.8; // base delay to sync with loading screen
+const CV_URL = process.env.NEXT_PUBLIC_CV_URL;
 
 export default function HeroSection() {
   const ref = useRef(null);
@@ -101,41 +102,55 @@ export default function HeroSection() {
           <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none mb-6">
             {/* First name – letters drop in */}
             <span className="inline-block overflow-hidden">
-              {(socialMedia.FIRST_NAME || "").split("").map((char: string, i: number) => (
-                <motion.span
-                  key={`first-${i}`}
-                  className="inline-block"
-                  initial={{ y: "100%", opacity: 0, filter: "blur(8px)" }}
-                  animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
-                  transition={{
-                    duration: 0.6,
-                    delay: D + 0.7 + i * 0.05,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                >
-                  {char}
-                </motion.span>
-              ))}
+              {(socialMedia.FIRST_NAME || "")
+                .split("")
+                .map((char: string, i: number) => (
+                  <motion.span
+                    key={`first-${i}`}
+                    className="inline-block"
+                    initial={{ y: "100%", opacity: 0, filter: "blur(8px)" }}
+                    animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
+                    transition={{
+                      duration: 0.6,
+                      delay: D + 0.7 + i * 0.05,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
             </span>
             <br />
             {/* Last name – letters rise up with accent color */}
             <span className="inline-block overflow-hidden relative">
-              {(socialMedia.LAST_NAME || "").split("").map((char: string, i: number) => (
-                <motion.span
-                  key={`last-${i}`}
-                  className="inline-block"
-                  style={{ color: "var(--accent)" }}
-                  initial={{ y: "100%", opacity: 0, filter: "blur(8px)", scale: 0.8 }}
-                  animate={{ y: "0%", opacity: 1, filter: "blur(0px)", scale: 1 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: D + 1.1 + i * 0.05,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                >
-                  {char}
-                </motion.span>
-              ))}
+              {(socialMedia.LAST_NAME || "")
+                .split("")
+                .map((char: string, i: number) => (
+                  <motion.span
+                    key={`last-${i}`}
+                    className="inline-block"
+                    style={{ color: "var(--accent)" }}
+                    initial={{
+                      y: "100%",
+                      opacity: 0,
+                      filter: "blur(8px)",
+                      scale: 0.8,
+                    }}
+                    animate={{
+                      y: "0%",
+                      opacity: 1,
+                      filter: "blur(0px)",
+                      scale: 1,
+                    }}
+                    transition={{
+                      duration: 0.6,
+                      delay: D + 1.1 + i * 0.05,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
               {/* Animated underline */}
               <motion.span
                 className="absolute bottom-0 left-0 h-[4px] rounded-full"
@@ -156,7 +171,11 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: D + 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{
+            duration: 0.7,
+            delay: D + 0.5,
+            ease: [0.22, 1, 0.36, 1],
+          }}
           className="flex flex-wrap justify-center gap-x-3 gap-y-1 mb-6"
         >
           {(socialMedia.JOB_TITLE || []).map((w: string, i: number) => (
@@ -197,7 +216,9 @@ export default function HeroSection() {
             Get in touch
           </a>
           <a
-            href="#"
+            href={CV_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95"
             style={{
               background: "var(--card)",
