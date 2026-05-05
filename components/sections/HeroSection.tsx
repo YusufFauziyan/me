@@ -219,7 +219,7 @@ export default function HeroSection() {
             href={CV_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95"
+            className="flex items-center cursor-pointer gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95"
             style={{
               background: "var(--card)",
               border: "1px solid var(--border)",
