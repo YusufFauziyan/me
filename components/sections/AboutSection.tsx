@@ -48,7 +48,7 @@ function Interactive3DTag() {
 
   return (
     <div
-      className="flex items-center justify-center"
+      className="items-center justify-center hidden lg:flex"
       style={{ perspective: "1200px" }}
     >
       <motion.div

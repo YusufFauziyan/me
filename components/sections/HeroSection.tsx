@@ -21,7 +21,7 @@ export default function HeroSection() {
     <section
       ref={ref}
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden px-6 pt-24"
+      className="relative min-h-screen flex flex-col justify-center overflow-hidden px-4 sm:px-6 pt-20 sm:pt-24 pb-20 sm:pb-0"
     >
       {/* Background grid */}
       <div
@@ -51,7 +51,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: D + 0.2 }}
-          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono mb-8"
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] sm:text-xs font-mono mb-4 sm:mb-8"
           style={{
             background: "var(--card)",
             border: "1px solid var(--border)",
@@ -99,7 +99,7 @@ export default function HeroSection() {
             />
           </motion.p>
 
-          <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none mb-6">
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-none mb-4 sm:mb-6">
             {/* First name – letters drop in */}
             <span className="inline-block overflow-hidden">
               {(socialMedia.FIRST_NAME || "")
@@ -176,12 +176,12 @@ export default function HeroSection() {
             delay: D + 0.5,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="flex flex-wrap justify-center gap-x-3 gap-y-1 mb-6"
+          className="flex flex-wrap justify-center gap-x-2 sm:gap-x-3 gap-y-1 mb-4 sm:mb-6"
         >
           {(socialMedia.JOB_TITLE || []).map((w: string, i: number) => (
             <motion.span
               key={i}
-              className="font-display text-xl md:text-2xl font-semibold"
+              className="font-display text-base sm:text-xl md:text-2xl font-semibold"
               style={{ color: i === 2 ? "var(--muted)" : "var(--fg)" }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -196,7 +196,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: D + 0.8 }}
-          className="text-base leading-relaxed mb-10 max-w-lg mx-auto"
+          className="text-sm sm:text-base leading-relaxed mb-6 sm:mb-10 max-w-lg mx-auto"
           style={{ color: "var(--muted)" }}
         >
           {socialMedia.JOB_DESCRIPTION}
@@ -206,11 +206,11 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: D + 1 }}
-          className="flex flex-wrap justify-center items-center gap-3"
+          className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-3"
         >
           <a
             href="#contact"
-            className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95"
+            className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95 w-full sm:w-auto"
             style={{ background: "var(--accent)", color: "#0D0D0F" }}
           >
             Get in touch
@@ -219,7 +219,7 @@ export default function HeroSection() {
             href={CV_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center cursor-pointer gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95"
+            className="flex items-center justify-center cursor-pointer gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95 w-full sm:w-auto"
             style={{
               background: "var(--card)",
               border: "1px solid var(--border)",
@@ -229,7 +229,7 @@ export default function HeroSection() {
             <Download size={14} />
             Download CV
           </a>
-          <div className="flex items-center gap-2 ml-2">
+          <div className="flex items-center gap-2 sm:ml-2">
             {[
               {
                 icon: GithubIcon,
@@ -270,7 +270,7 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: D + 1.4 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2"
       >
         <span className="text-xs font-mono" style={{ color: "var(--muted)" }}>
           scroll
