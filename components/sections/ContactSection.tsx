@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useState, FormEvent } from "react";
 import { Mail, Send, CheckCircle, MapPin, Clock } from "lucide-react";
 import { GithubIcon, LinkedinIcon, XIcon } from "@/components/Icons";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const username = process.env.USERNAME;
 const githubAddress = process.env.GITHUB_ADDRESS;
@@ -46,6 +47,7 @@ export default function ContactSection() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const isMobile = useIsMobile();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -139,19 +141,8 @@ export default function ContactSection() {
                 {socials.map(({ icon: Icon, label, handle, href, hidden }) => {
                   if (hidden) return;
 
-                  return (
-                    <motion.a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      whileHover={{ x: 6 }}
-                      transition={{ duration: 0.2 }}
-                      className="flex items-center gap-3 p-3 rounded-2xl group"
-                      style={{
-                        background: "var(--card)",
-                        border: "1px solid var(--border)",
-                      }}
-                    >
+                  const inner = (
+                    <>
                       <div
                         className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0"
                         style={{
@@ -175,6 +166,40 @@ export default function ContactSection() {
                           {handle}
                         </div>
                       </div>
+                    </>
+                  );
+
+                  if (isMobile) {
+                    return (
+                      <a
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        className="flex items-center gap-3 p-3 rounded-2xl group"
+                        style={{
+                          background: "var(--card)",
+                          border: "1px solid var(--border)",
+                        }}
+                      >
+                        {inner}
+                      </a>
+                    );
+                  }
+
+                  return (
+                    <motion.a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      whileHover={{ x: 6 }}
+                      transition={{ duration: 0.2 }}
+                      className="flex items-center gap-3 p-3 rounded-2xl group"
+                      style={{
+                        background: "var(--card)",
+                        border: "1px solid var(--border)",
+                      }}
+                    >
+                      {inner}
                     </motion.a>
                   );
                 })}

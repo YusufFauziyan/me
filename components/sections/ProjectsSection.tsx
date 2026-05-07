@@ -7,15 +7,18 @@ import { ExternalLink, ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/Icons";
 import { useRef, MouseEvent, useState } from "react";
 import ReadmeModal from "@/components/ReadmeModal";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 function ProjectCard({
   project,
   index,
   onOpenReadme,
+  isMobile,
 }: {
   project: (typeof projects)[0];
   index: number;
   onOpenReadme: (url: string) => void;
+  isMobile: boolean;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
@@ -30,6 +33,7 @@ function ProjectCard({
   });
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+    if (isMobile) return;
     const rect = cardRef.current?.getBoundingClientRect();
     if (!rect) return;
     x.set((e.clientX - rect.left) / rect.width - 0.5);
@@ -40,6 +44,107 @@ function ProjectCard({
     x.set(0);
     y.set(0);
   };
+
+  // On mobile, render a plain div without 3D transforms and framer-motion
+  if (isMobile) {
+    return (
+      <div
+        ref={cardRef}
+        className="group relative rounded-3xl overflow-hidden cursor-default"
+      >
+        <div
+          style={{ background: "var(--card)", border: "1px solid var(--border)" }}
+          className="rounded-3xl overflow-hidden h-full flex flex-col"
+        >
+          {/* Image */}
+          <div className="relative h-52 overflow-hidden">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover"
+              loading="eager"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(to bottom, transparent 30%, var(--card))",
+              }}
+            />
+            {project.featured && (
+              <div
+                className="absolute top-4 left-4 px-2.5 py-1 rounded-lg text-xs font-mono font-semibold"
+                style={{ background: "var(--accent)", color: "#0D0D0F" }}
+              >
+                Featured
+              </div>
+            )}
+            {/* Action buttons always visible on mobile */}
+            <div className="absolute inset-0 flex items-center justify-center gap-3">
+              {project.demo !== "#" && project.demo && (
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold backdrop-blur-sm"
+                  style={{ background: "rgba(232,255,71,0.9)", color: "#0D0D0F" }}
+                >
+                  <ExternalLink size={14} /> Live Demo
+                </a>
+              )}
+              {project.github !== "#" && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold backdrop-blur-sm"
+                  style={{
+                    background: "rgba(0,0,0,0.6)",
+                    color: "#fff",
+                    border: "1px solid rgba(255,255,255,0.2)",
+                  }}
+                >
+                  <GithubIcon size={14} /> Code
+                </a>
+              )}
+            </div>
+          </div>
+
+          {/* Content */}
+          <div className="p-6 flex flex-col flex-1">
+            <div className="flex items-start justify-between mb-3">
+              <h3 className="font-display text-xl font-bold">{project.title}</h3>
+              <div
+                className="cursor-pointer"
+                onClick={() => {
+                  if (project.github !== "#") {
+                    onOpenReadme(project.github);
+                  }
+                }}
+              >
+                <ArrowUpRight size={18} style={{ color: "var(--muted)" }} />
+              </div>
+            </div>
+            <p
+              className="text-sm leading-relaxed mb-5 flex-1 line-clamp-3"
+              style={{ color: "var(--muted)" }}
+            >
+              {project.description}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {project.tech.map((t) => (
+                <span key={t} className="tag">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -161,6 +266,7 @@ export default function ProjectsSection() {
   const [selectedGithubUrl, setSelectedGithubUrl] = useState<string | null>(
     null,
   );
+  const isMobile = useIsMobile();
 
   return (
     <section id="projects" className="py-28 px-6">
@@ -191,27 +297,44 @@ export default function ProjectsSection() {
               project={project}
               index={i}
               onOpenReadme={setSelectedGithubUrl}
+              isMobile={isMobile}
             />
           ))}
         </div>
 
         <AnimatedSection delay={0.3}>
           <div className="mt-12 text-center">
-            <motion.a
-              href="#"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm"
-              style={{
-                border: "1px solid var(--border)",
-                background: "var(--card)",
-                color: "var(--fg)",
-              }}
-            >
-              <GithubIcon size={15} />
-              View all on GitHub
-              <ArrowUpRight size={14} style={{ color: "var(--muted)" }} />
-            </motion.a>
+            {isMobile ? (
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm"
+                style={{
+                  border: "1px solid var(--border)",
+                  background: "var(--card)",
+                  color: "var(--fg)",
+                }}
+              >
+                <GithubIcon size={15} />
+                View all on GitHub
+                <ArrowUpRight size={14} style={{ color: "var(--muted)" }} />
+              </a>
+            ) : (
+              <motion.a
+                href="#"
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm"
+                style={{
+                  border: "1px solid var(--border)",
+                  background: "var(--card)",
+                  color: "var(--fg)",
+                }}
+              >
+                <GithubIcon size={15} />
+                View all on GitHub
+                <ArrowUpRight size={14} style={{ color: "var(--muted)" }} />
+              </motion.a>
+            )}
           </div>
         </AnimatedSection>
       </div>

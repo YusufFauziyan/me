@@ -3,8 +3,11 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { motion } from "framer-motion";
 import { experiences } from "@/lib/data";
 import { Briefcase, Calendar } from "lucide-react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function ExperienceSection() {
+  const isMobile = useIsMobile();
+
   return (
     <section id="experience" className="py-28 px-6" style={{ background: "var(--card)" }}>
       <div className="max-w-4xl mx-auto">
@@ -24,33 +27,9 @@ export default function ExperienceSection() {
           />
 
           <div className="space-y-6">
-            {experiences.map((exp, i) => (
-              <motion.div
-                key={exp.id}
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                className="relative md:pl-20"
-              >
-                {/* Timeline dot */}
-                <div className="hidden md:flex absolute left-0 top-6 w-12 items-center justify-center">
-                  <motion.div
-                    whileInView={{ scale: [0, 1.2, 1] }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.12 + 0.3, duration: 0.4 }}
-                    className="w-3 h-3 rounded-full border-2"
-                    style={{
-                      background: exp.current ? "var(--accent)" : "var(--bg)",
-                      borderColor: exp.current ? "var(--accent)" : "var(--border)",
-                    }}
-                  />
-                </div>
-
-                {/* Card */}
-                <motion.div
-                  whileHover={{ y: -3 }}
-                  transition={{ duration: 0.2 }}
+            {experiences.map((exp, i) => {
+              const card = (
+                <div
                   className="p-6 rounded-3xl"
                   style={{ background: "var(--bg)", border: "1px solid var(--border)" }}
                 >
@@ -79,9 +58,50 @@ export default function ExperienceSection() {
                   <p className="text-sm leading-relaxed" style={{ color: "var(--muted)" }}>
                     {exp.description}
                   </p>
+                </div>
+              );
+
+              if (isMobile) {
+                return (
+                  <div key={exp.id} className="relative md:pl-20">
+                    {card}
+                  </div>
+                );
+              }
+
+              return (
+                <motion.div
+                  key={exp.id}
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  className="relative md:pl-20"
+                >
+                  {/* Timeline dot */}
+                  <div className="hidden md:flex absolute left-0 top-6 w-12 items-center justify-center">
+                    <motion.div
+                      whileInView={{ scale: [0, 1.2, 1] }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.12 + 0.3, duration: 0.4 }}
+                      className="w-3 h-3 rounded-full border-2"
+                      style={{
+                        background: exp.current ? "var(--accent)" : "var(--bg)",
+                        borderColor: exp.current ? "var(--accent)" : "var(--border)",
+                      }}
+                    />
+                  </div>
+
+                  {/* Card */}
+                  <motion.div
+                    whileHover={{ y: -3 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    {card}
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

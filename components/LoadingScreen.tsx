@@ -1,13 +1,24 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function LoadingScreen() {
+  const isMobile = useIsMobile();
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    // Skip loading screen on mobile for instant content display
+    if (isMobile) {
+      setLoading(false);
+      return;
+    }
     const t = setTimeout(() => setLoading(false), 1800);
     return () => clearTimeout(t);
-  }, []);
+  }, [isMobile]);
+
+  // On mobile, don't render anything
+  if (isMobile) return null;
 
   return (
     <AnimatePresence>

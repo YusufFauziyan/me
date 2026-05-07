@@ -1,6 +1,7 @@
 "use client";
 import { motion, useInView } from "framer-motion";
 import { useRef, ReactNode } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface Props {
   children: ReactNode;
@@ -10,7 +11,14 @@ interface Props {
 
 export default function AnimatedSection({ children, className = "", delay = 0 }: Props) {
   const ref = useRef(null);
+  const isMobile = useIsMobile();
   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+  // On mobile, render children directly without framer-motion wrapper
+  if (isMobile) {
+    return <div ref={ref} className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       ref={ref}

@@ -2,6 +2,7 @@
 import AnimatedSection from "@/components/AnimatedSection";
 import { motion } from "framer-motion";
 import { skills } from "@/lib/data";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const categories = [
   { key: "frontend" as const, label: "Frontend", icon: "⬡" },
@@ -134,6 +135,8 @@ const techIcons: Record<string, React.ReactNode> = {
 };
 
 export default function SkillsSection() {
+  const isMobile = useIsMobile();
+
   return (
     <section
       id="skills"
@@ -174,34 +177,51 @@ export default function SkillsSection() {
                   </h3>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {skills[key].map((skill, i) => (
-                    <motion.span
-                      key={skill}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: catIdx * 0.1 + i * 0.05 }}
-                      viewport={{ once: true }}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-medium cursor-default"
-                      style={{
-                        background: "var(--card)",
-                        border: "1px solid var(--border)",
-                        color: "var(--fg)",
-                      }}
-                    >
-                      <span style={{ color: "var(--accent)" }}>
-                        {techIcons[skill] || "◆"}
+                  {skills[key].map((skill, i) =>
+                    isMobile ? (
+                      <span
+                        key={skill}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-medium cursor-default"
+                        style={{
+                          background: "var(--card)",
+                          border: "1px solid var(--border)",
+                          color: "var(--fg)",
+                        }}
+                      >
+                        <span style={{ color: "var(--accent)" }}>
+                          {techIcons[skill] || "◆"}
+                        </span>
+                        {skill}
                       </span>
-                      {skill}
-                    </motion.span>
-                  ))}
+                    ) : (
+                      <motion.span
+                        key={skill}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: catIdx * 0.1 + i * 0.05 }}
+                        viewport={{ once: true }}
+                        whileHover={{ scale: 1.05, y: -2 }}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-sm font-medium cursor-default"
+                        style={{
+                          background: "var(--card)",
+                          border: "1px solid var(--border)",
+                          color: "var(--fg)",
+                        }}
+                      >
+                        <span style={{ color: "var(--accent)" }}>
+                          {techIcons[skill] || "◆"}
+                        </span>
+                        {skill}
+                      </motion.span>
+                    ),
+                  )}
                 </div>
               </div>
             </AnimatedSection>
           ))}
         </div>
 
-        {/* Marquee strip */}
+        {/* Marquee strip – use CSS animation on mobile instead of framer-motion */}
         <AnimatedSection delay={0.4}>
           <div
             className="mt-12 overflow-hidden rounded-2xl py-4"
@@ -210,25 +230,45 @@ export default function SkillsSection() {
               background: "var(--bg)",
             }}
           >
-            <motion.div
-              animate={{ x: [0, -1200] }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="flex gap-6 whitespace-nowrap"
-            >
-              {[
-                ...Object.values(skills).flat(),
-                ...Object.values(skills).flat(),
-                ...Object.values(skills).flat(),
-              ].map((s, i) => (
-                <span
-                  key={i}
-                  className="text-sm font-mono px-3 py-1 flex items-center gap-2"
-                  style={{ color: "var(--muted)" }}
-                >
-                  {techIcons[s] || "◆"} {s}
-                </span>
-              ))}
-            </motion.div>
+            {isMobile ? (
+              <div
+                className="flex gap-6 whitespace-nowrap animate-marquee"
+                style={{ animation: "marquee 30s linear infinite" }}
+              >
+                {[
+                  ...Object.values(skills).flat(),
+                  ...Object.values(skills).flat(),
+                ].map((s, i) => (
+                  <span
+                    key={i}
+                    className="text-sm font-mono px-3 py-1 flex items-center gap-2"
+                    style={{ color: "var(--muted)" }}
+                  >
+                    {techIcons[s] || "◆"} {s}
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <motion.div
+                animate={{ x: [0, -1200] }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="flex gap-6 whitespace-nowrap"
+              >
+                {[
+                  ...Object.values(skills).flat(),
+                  ...Object.values(skills).flat(),
+                  ...Object.values(skills).flat(),
+                ].map((s, i) => (
+                  <span
+                    key={i}
+                    className="text-sm font-mono px-3 py-1 flex items-center gap-2"
+                    style={{ color: "var(--muted)" }}
+                  >
+                    {techIcons[s] || "◆"} {s}
+                  </span>
+                ))}
+              </motion.div>
+            )}
           </div>
         </AnimatedSection>
       </div>
