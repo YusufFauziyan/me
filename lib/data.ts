@@ -64,7 +64,7 @@ export const projects = [
 export const experiences = [
   {
     id: 1,
-    role: "Front end & Mobile Developer",
+    role: "Software Engineer",
     company: "PT BODHA PADMA NAWADHYA",
     duration: "Sep 2024 — Present",
     description: "Spearheaded the development of high-impact web and mobile applications, including the EMAS enterprise platform. Engineered seamless cross-platform experiences for iOS and Android, focusing on robust state management, efficient REST API integrations, and delivering pixel-perfect, responsive user interfaces.",
@@ -72,10 +72,10 @@ export const experiences = [
   },
   {
     id: 2,
-    role: "Front end Developer",
+    role: "Software Engineer",
     company: "PT BODHA DHARMAJA ARYADHANA",
     duration: "Jun 2022 — Sep 2024",
-    description: "Architected scalable frontend solutions for data-intensive enterprise systems, including Khayangan (VM monitoring) and Sapujagad (Big Data platform). Collaborated closely with backend teams to integrate complex APIs, transforming massive datasets into intuitive, real-time interactive dashboards.",
+    description: "Engineered scalable fullstack solutions for enterprise and data intensive systems including Khayangan VM Management Platform and Sapujagad Big Data Platform. Designed and integrated complex APIs, real time data streaming, infrastructure monitoring, and interactive dashboards while collaborating across frontend and backend development to deliver high performance and reliable applications.",
     current: false,
   },
   {
