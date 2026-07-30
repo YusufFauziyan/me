@@ -24,7 +24,8 @@ const nextConfig: NextConfig = {
     EMAIL_ADDRESS: "yusuffauziyan@gmail.com",
     GITHUB_ADDRESS: "https://github.com/yusuffauziyan",
     LINKEDIN_ADDRESS: "https://www.linkedin.com/in/yusuffauziyan",
-    X_ADDRESS: ""
+    X_ADDRESS: "",
+    NEXT_PUBLIC_CV_URL: process.env.NEXT_PUBLIC_CV_URL || "https://drive.google.com/file/d/1FKu9QqWFGHOu4OxVZfcE-JpRNnYW2cgm/view?usp=sharing"
   }
 };
 
