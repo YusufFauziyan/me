@@ -343,6 +343,9 @@ export default function ProjectsSection() {
         isOpen={!!selectedGithubUrl}
         onClose={() => setSelectedGithubUrl(null)}
         githubUrl={selectedGithubUrl || ""}
+        readmeUrl={
+          projects.find((p) => p.github === selectedGithubUrl)?.readmeUrl
+        }
         demoUrl={
           projects.find((p) => p.github === selectedGithubUrl)?.demo || "#"
         }
