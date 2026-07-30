@@ -8,6 +8,7 @@ function pullReadme() {
   const targetFile = path.join(targetDir, "ngantry-app-frontend.md");
   const assetsTargetDir = path.join(targetDir, "src/assets");
   const imageTargetFile = path.join(assetsTargetDir, "landing-page.png");
+  const imageMainTargetFile = path.join(targetDir, "landing-page.png");
 
   console.log("Creating target directories if not exists...");
   if (!fs.existsSync(targetDir)) {
@@ -37,6 +38,8 @@ function pullReadme() {
   if (fs.existsSync(sourceImage)) {
     console.log("Copying landing-page.png to public/readmes/src/assets/landing-page.png...");
     fs.copyFileSync(sourceImage, imageTargetFile);
+    console.log("Copying landing-page.png to public/readmes/landing-page.png...");
+    fs.copyFileSync(sourceImage, imageMainTargetFile);
   } else {
     console.warn("Source landing-page.png not found in", sourceImage);
   }

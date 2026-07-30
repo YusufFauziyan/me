@@ -5,7 +5,7 @@ export const projects = [
     description: "A modern, responsive, and easy-to-use digital queue management system designed for various business needs. It allows customers to take queue tickets independently, monitor queues in real-time, and assists admins in managing queue flows from an interactive dashboard.",
     tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "Radix UI", "React Router"],
     image: "/readmes/landing-page.png",
-    demo: "https://test.fauzyan.my.id",
+    demo: "https://ngantry.my.id",
     github: "https://github.com/YusufFauziyan/Ngantry-app-frontend",
     readmeUrl: "/readmes/ngantry-app-frontend.md",
     featured: true,
