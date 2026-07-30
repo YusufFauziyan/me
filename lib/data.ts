@@ -1,5 +1,16 @@
 export const projects = [
   {
+    id: 7,
+    title: "Ngantry",
+    description: "A modern, responsive, and easy-to-use digital queue management system designed for various business needs. It allows customers to take queue tickets independently, monitor queues in real-time, and assists admins in managing queue flows from an interactive dashboard.",
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "Radix UI", "React Router"],
+    image: "/readmes/landing-page.png",
+    demo: "https://test.fauzyan.my.id",
+    github: "https://github.com/YusufFauziyan/Ngantry-app-frontend",
+    readmeUrl: "/readmes/ngantry-app-frontend.md",
+    featured: true,
+  },
+  {
     id: 1,
     title: "YUMA AI",
     description: "A premium, full-stack AI chatbot SaaS application powered by Google Gemini. Features real-time streaming responses, Google SSO authentication, multi-conversation support, and a beautiful landing page with smooth Framer Motion animations.",
@@ -57,16 +68,6 @@ export const projects = [
     image: "https://github.com/YusufFauziyan/attendance-nextjs/blob/main/public/screnshoot-landing.png?raw=true",
     demo: "",
     github: "https://github.com/YusufFauziyan/attendance-nextjs",
-    featured: true,
-  },
-  {
-    id: 7,
-    title: "Ngantry",
-    description: "A modern, responsive, and easy-to-use digital queue management system designed for various business needs. It allows customers to take queue tickets independently, monitor queues in real-time, and assists admins in managing queue flows from an interactive dashboard.",
-    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "Radix UI", "React Router"],
-    image: "https://github.com/YusufFauziyan/Ngantry-app-frontend/blob/main/src/assets/landing-page.png?raw=true",
-    demo: "https://test.fauzyan.my.id",
-    github: "https://github.com/YusufFauziyan/Ngantry-app-frontend",
     featured: true,
   },
 ];

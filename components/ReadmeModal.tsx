@@ -11,6 +11,7 @@ interface ReadmeModalProps {
   isOpen: boolean;
   onClose: () => void;
   githubUrl: string;
+  readmeUrl?: string;
   demoUrl?: string;
 }
 
@@ -70,6 +71,7 @@ export default function ReadmeModal({
   isOpen,
   onClose,
   githubUrl,
+  readmeUrl,
   demoUrl,
 }: ReadmeModalProps) {
   const [content, setContent] = useState<string>("");
@@ -84,14 +86,19 @@ export default function ReadmeModal({
       setLoading(true);
       setError(null);
       setContent("");
-      setRawBase(getRawBaseUrl(githubUrl));
+      
+      if (readmeUrl) {
+        setRawBase(readmeUrl.substring(0, readmeUrl.lastIndexOf("/")) || "");
+      } else {
+        setRawBase(getRawBaseUrl(githubUrl));
+      }
 
       try {
-        const rawUrl = getReadmeUrl(githubUrl);
+        const rawUrl = readmeUrl || getReadmeUrl(githubUrl);
         const res = await fetch(rawUrl);
 
         if (!res.ok) {
-          if (rawUrl.includes("/main/")) {
+          if (!readmeUrl && rawUrl.includes("/main/")) {
             const fallbackUrl = rawUrl.replace("/main/", "/master/");
             setRawBase(getRawBaseUrl(githubUrl).replace("/main", "/master"));
             const fallbackRes = await fetch(fallbackUrl);
@@ -112,7 +119,7 @@ export default function ReadmeModal({
     };
 
     fetchReadme();
-  }, [isOpen, githubUrl]);
+  }, [isOpen, githubUrl, readmeUrl]);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? "hidden" : "unset";
