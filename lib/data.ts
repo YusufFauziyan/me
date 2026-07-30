@@ -3,7 +3,7 @@ export const projects = [
     id: 7,
     title: "Ngantry",
     description: "A modern, responsive, and easy-to-use digital queue management system designed for various business needs. It allows customers to take queue tickets independently, monitor queues in real-time, and assists admins in managing queue flows from an interactive dashboard.",
-    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "Radix UI", "React Router"],
+    tech: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "Go", "Gin", "PostgreSQL", "GORM", "Docker"],
     image: "/readmes/landing-page.png",
     demo: "https://ngantry.my.id",
     github: "https://github.com/YusufFauziyan/Ngantry-app-frontend",
