@@ -1,5 +1,16 @@
 export const projects = [
   {
+    id: 1,
+    title: "YuMa",
+    description: "An Intelligent AI Workspace for Document Intelligence, Data Analysis, Generative Media, and Multimodal Conversations. Built with Go and React 19, supporting PDF/Office document analysis, data profiling, WebGL wave interactions, and streaming SSE.",
+    tech: ["React 19", "TypeScript", "Vite", "Tailwind CSS", "Go", "Gin", "PostgreSQL", "GORM", "Docker", "Cloudflare R2"],
+    image: "/readmes/yuma/landing.png",
+    demo: "https://yuma.fauzyan.my.id",
+    github: "https://github.com/YusufFauziyan/YuMa",
+    readmeUrl: "/readmes/yuma.md",
+    featured: true,
+  },
+  {
     id: 7,
     title: "Ngantry",
     description: "A modern, responsive, and easy-to-use digital queue management system designed for various business needs. It allows customers to take queue tickets independently, monitor queues in real-time, and assists admins in managing queue flows from an interactive dashboard.",
@@ -8,16 +19,6 @@ export const projects = [
     demo: "https://ngantry.my.id",
     github: "https://github.com/YusufFauziyan/Ngantry-app-frontend",
     readmeUrl: "/readmes/ngantry-app-frontend.md",
-    featured: true,
-  },
-  {
-    id: 1,
-    title: "YUMA AI",
-    description: "A premium, full-stack AI chatbot SaaS application powered by Google Gemini. Features real-time streaming responses, Google SSO authentication, multi-conversation support, and a beautiful landing page with smooth Framer Motion animations.",
-    tech: ["Next.js", "Express", "Tailwind", "MySQL", "Prisma", "Framer Motion", "Google Gemini", "Google SSO"],
-    image: "https://github.com/YusufFauziyan/yuma_ai/blob/main/frontend/public/screenshot-landing.png?raw=true",
-    demo: "https://yuma-ai-azure.vercel.app",
-    github: "https://github.com/YusufFauziyan/yuma_ai",
     featured: true,
   },
   {
