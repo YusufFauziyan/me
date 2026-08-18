@@ -57,11 +57,16 @@ const getRawBaseUrl = (githubUrl: string): string => {
 
 /**
  * Resolve a potentially-relative image src to an absolute URL.
- * Absolute URLs (http/https) and shields.io badges are returned as-is.
+ * Absolute URLs (http/https), root-relative paths (/...), and shields.io badges are returned as-is.
  */
 const resolveImageSrc = (src: string, rawBase: string): string => {
   if (!src) return src;
-  if (src.startsWith("http://") || src.startsWith("https://")) return src;
+  if (
+    src.startsWith("http://") ||
+    src.startsWith("https://") ||
+    src.startsWith("/")
+  )
+    return src;
   // Remove leading ./
   const normalized = src.replace(/^\.\//, "");
   return `${rawBase}/${normalized}`;
