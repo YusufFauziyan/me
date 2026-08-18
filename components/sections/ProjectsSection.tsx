@@ -78,7 +78,7 @@ function ProjectCard({
                 className="absolute top-4 left-4 px-2.5 py-1 rounded-lg text-xs font-mono font-semibold"
                 style={{ background: "var(--accent)", color: "#0D0D0F" }}
               >
-                Featured
+                Complete
               </div>
             )}
             {/* Action buttons always visible on mobile */}
@@ -188,7 +188,7 @@ function ProjectCard({
               className="absolute top-4 left-4 px-2.5 py-1 rounded-lg text-xs font-mono font-semibold"
               style={{ background: "var(--accent)", color: "#0D0D0F" }}
             >
-              Featured
+              Complete
             </div>
           )}
           {/* Hover overlay actions */}
