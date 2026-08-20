@@ -5,7 +5,7 @@ export const projects = [
     description: "An Intelligent AI Workspace for Document Intelligence, Data Analysis, Generative Media, and Multimodal Conversations. Built with Go and React 19, supporting PDF/Office document analysis, data profiling, WebGL wave interactions, and streaming SSE.",
     tech: ["React 19", "TypeScript", "Vite", "Tailwind CSS", "Go", "Gin", "PostgreSQL", "GORM", "Docker", "Cloudflare R2"],
     image: "/readmes/yuma/landing.png",
-    demo: "https://yuma.fauzyan.my.id",
+    demo: "https://yuma.maleqq.com",
     github: "https://github.com/YusufFauziyan/YuMa",
     readmeUrl: "/readmes/yuma.md",
     featured: true,
