@@ -44,7 +44,7 @@ export const projects: Project[] = [
     title: "Ngantry",
     description:
       "A digital queue management system: customers pull tickets themselves, watch the queue live, and admins run the flow from one dashboard.",
-    href: "https://ngantry.my.id",
+    href: "https://ngantry.maleqq.com",
     image: "/readmes/landing-page.png",
     tags: [
       { label: "React", tone: "t-node" },
