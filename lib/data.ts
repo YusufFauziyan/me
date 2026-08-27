@@ -11,7 +11,9 @@ export const site = {
   email: "yusuffauziyan@gmail.com",
   github: "https://github.com/yusuffauziyan",
   linkedin: "https://www.linkedin.com/in/yusuffauziyan",
-  cv: "https://drive.google.com/file/d/1YiEvdg_OlaoFEpbC2obQVXsK7B20pPMy/view?usp=sharing",
+  cv:
+    process.env.NEXT_PUBLIC_CV_URL ||
+    "https://drive.google.com/file/d/1YiEvdg_OlaoFEpbC2obQVXsK7B20pPMy/view?usp=sharing",
   // Set NEXT_PUBLIC_SITE_URL in production so OG images and the sitemap use absolute URLs.
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://yusuffauziyan.vercel.app",
 };
@@ -56,7 +58,8 @@ export const projects: Project[] = [
     description:
       "A scalable photobooth system: capture, QR handoff, online galleries, and physical print management.",
     href: "https://yu-booth.vercel.app",
-    image: "https://github.com/YusufFauziyan/YuBooth/blob/main/docs/landing.png?raw=true",
+    image:
+      "https://github.com/YusufFauziyan/YuBooth/blob/main/docs/landing.png?raw=true",
     tags: [
       { label: "Next.js", tone: "t-next" },
       { label: "Socket.IO", tone: "t-node" },
