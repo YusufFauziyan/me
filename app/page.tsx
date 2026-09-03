@@ -4,7 +4,8 @@ import FlappyPixel from "@/components/FlappyPixel";
 import JakartaClock from "@/components/JakartaClock";
 import QuotePixels from "@/components/QuotePixels";
 import Motion from "@/components/Motion";
-import { site, projects, featured, skills, experience } from "@/lib/data";
+import { site, projects, featuredProjects, skills, experience } from "@/lib/data";
+import FeaturedSection from "@/components/FeaturedSection";
 
 function Mark() {
   return (
@@ -223,34 +224,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="feat" id="featured">
-          <div className="wrap">
-            <div className="media">
-              <Image
-                src={featured.image}
-                alt={`${featured.title} screenshot`}
-                fill
-                sizes="(min-width: 880px) 600px, 100vw"
-              />
-            </div>
-            <div>
-              <p className="k mono">Featured project</p>
-              <h2>{featured.title}</h2>
-              <p>{featured.description}</p>
-              <div className="split">
-                {featured.meta.map((m) => (
-                  <div key={m.label}>
-                    <span className="lb">{m.label}</span>
-                    <span className="vl">{m.value}</span>
-                  </div>
-                ))}
-              </div>
-              <a className="btn" href={featured.href} target="_blank" rel="noopener noreferrer">
-                Open the live site
-              </a>
-            </div>
-          </div>
-        </section>
+        <FeaturedSection projects={featuredProjects} />
 
         <div className="sheet">
           <section className="ed" id="experience">

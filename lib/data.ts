@@ -133,18 +133,54 @@ export const projects: Project[] = [
   },
 ];
 
-export const featured = {
-  title: "YuMa",
-  description:
-    "An intelligent AI workspace: document intelligence over PDF and Office files, data profiling, generative media, and multimodal conversation. Go and Gin on the back, React 19 and WebGL on the front, answers streamed over SSE.",
-  image: projects[0].image,
-  href: projects[0].href,
-  meta: [
-    { label: "Stack", value: "Go · Gin · React 19" },
-    { label: "Data", value: "PostgreSQL · GORM · R2" },
-    { label: "Year", value: "2026" },
-  ],
+export type FeaturedProject = {
+  title: string;
+  description: string;
+  image: string;
+  href: string;
+  meta: { label: string; value: string }[];
 };
+
+export const featuredProjects: FeaturedProject[] = [
+  {
+    title: "Yutomation",
+    description:
+      "Autonomous AI vertical video synthesis & multi-platform publishing engine for TikTok and YouTube Shorts. Full visual automation canvas, MPT video rendering pipeline, Edge-TTS, and automated cron scheduler.",
+    image: "/readmes/yutomation/landing.png",
+    href: "https://yutomation.maleqq.space",
+    meta: [
+      { label: "Stack", value: "Go · React 19 · React Flow" },
+      { label: "Engine", value: "MPT · Edge-TTS · FFmpeg" },
+      { label: "Year", value: "2026" },
+    ],
+  },
+  {
+    title: "YuMa",
+    description:
+      "An intelligent AI workspace: document intelligence over PDF and Office files, data profiling, generative media, and multimodal conversation. Go and Gin on the back, React 19 and WebGL on the front, answers streamed over SSE.",
+    image: "/readmes/yuma/landing.png",
+    href: "https://yuma.maleqq.space",
+    meta: [
+      { label: "Stack", value: "Go · Gin · React 19" },
+      { label: "Data", value: "PostgreSQL · GORM · R2" },
+      { label: "Year", value: "2026" },
+    ],
+  },
+  {
+    title: "Ngantry",
+    description:
+      "A digital queue management system: customers pull tickets themselves, watch the queue live, and admins run the flow from one dashboard.",
+    image: "/readmes/landing-page.png",
+    href: "https://ngantry.maleqq.space",
+    meta: [
+      { label: "Stack", value: "Go · Gin · React" },
+      { label: "Data", value: "PostgreSQL · GORM" },
+      { label: "Year", value: "2026" },
+    ],
+  },
+];
+
+export const featured = featuredProjects[0];
 
 export const skills = [
   {
