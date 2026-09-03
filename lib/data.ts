@@ -28,10 +28,23 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    title: "Yutomation",
+    description:
+      "Autonomous AI vertical video synthesis & multi-platform publishing engine for TikTok and YouTube Shorts. Go + React 19, React Flow automation canvas, MPT pipeline, Edge-TTS, and automated cron scheduler.",
+    href: "https://github.com/YusufFauziyan/yutomation",
+    image: "/readmes/yutomation/landing.png",
+    tags: [
+      { label: "React 19", tone: "t-node" },
+      { label: "Go", tone: "t-ai" },
+      { label: "React Flow", tone: "t-ui" },
+      { label: "Docker", tone: "t-next" },
+    ],
+  },
+  {
     title: "YuMa",
     description:
       "An intelligent AI workspace for document intelligence, data analysis, and multimodal conversations. Go + React 19, PDF/Office parsing, WebGL wave interactions, streaming SSE.",
-    href: "https://yuma.maleqq.com",
+    href: "https://yuma.maleqq.space",
     image: "/readmes/yuma/landing.png",
     tags: [
       { label: "React 19", tone: "t-node" },
@@ -44,7 +57,7 @@ export const projects: Project[] = [
     title: "Ngantry",
     description:
       "A digital queue management system: customers pull tickets themselves, watch the queue live, and admins run the flow from one dashboard.",
-    href: "https://ngantry.maleqq.com",
+    href: "https://ngantry.maleqq.space",
     image: "/readmes/landing-page.png",
     tags: [
       { label: "React", tone: "t-node" },
