@@ -31,7 +31,7 @@ export const projects: Project[] = [
     title: "Yutomation",
     description:
       "Autonomous AI vertical video synthesis & multi-platform publishing engine for TikTok and YouTube Shorts. Go + React 19, React Flow automation canvas, MPT pipeline, Edge-TTS, and automated cron scheduler.",
-    href: "https://github.com/YusufFauziyan/yutomation",
+    href: "https://yutomation.maleqq.space",
     image: "/readmes/yutomation/landing.png",
     tags: [
       { label: "React 19", tone: "t-node" },
