@@ -1,8 +1,31 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import type { FeaturedProject } from "@/lib/data";
+
+// Typing picks up from the middle of the string rather than an empty line, so a
+// swap reads as the tail rewriting itself instead of a full retype.
+const START = 0.5;
+
+function useTypewriter(text: string, speed: number) {
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    const instant =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setN(instant ? text.length : Math.floor(text.length * START));
+  }, [text]);
+
+  useEffect(() => {
+    if (n >= text.length) return;
+    const t = setTimeout(() => setN(n + 1), speed);
+    return () => clearTimeout(t);
+  }, [n, text, speed]);
+
+  return { shown: text.slice(0, n), done: n >= text.length };
+}
 
 export default function FeaturedSection({
   projects,
@@ -11,112 +34,117 @@ export default function FeaturedSection({
 }) {
   const [index, setIndex] = useState(0);
   const current = projects[index] || projects[0];
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const title = useTypewriter(current.title, 45);
+  const description = useTypewriter(current.description, 9);
 
-  const prevProject = () => {
-    setIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
+  // restarts on every index change, so any click resets the 10s window
+  useEffect(() => {
+    if (projects.length < 2) return;
+    const t = setTimeout(() => setIndex((i) => (i + 1) % projects.length), 10000);
+    return () => clearTimeout(t);
+  }, [index, projects.length]);
+
+  // signed distance from the active card, wrapped so the fan stays balanced
+  const offset = (i: number) => {
+    const half = projects.length / 2;
+    const d = i - index;
+    return d > half ? d - projects.length : d < -half ? d + projects.length : d;
   };
 
-  const nextProject = () => {
-    setIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
-  };
+  const go = (step: number) =>
+    setIndex((i) => (i + step + projects.length) % projects.length);
 
   return (
     <section className="feat" id="featured">
       <div className="wrap">
-        <div className="media">
-          <Image
-            key={current.image}
-            src={current.image}
-            alt={`${current.title} screenshot`}
-            fill
-            sizes="(min-width: 880px) 600px, 100vw"
-            priority
-          />
-        </div>
-        <div>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
-            <p className="k mono" style={{ margin: 0 }}>
-              Featured project ({index + 1}/{projects.length})
-            </p>
-            <div style={{ display: "flex", gap: "6px" }}>
-              <button
-                type="button"
-                onClick={prevProject}
-                aria-label="Previous featured project"
-                style={{
-                  background: "rgba(255,255,255,0.12)",
-                  color: "#fff",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  padding: "6px 12px",
-                  cursor: "pointer",
-                  fontSize: "12px",
-                  fontFamily: "var(--mono)",
-                  clipPath: "var(--px-s)",
-                  transition: "background 0.2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.25)")}
-                onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
-              >
-                ← Prev
-              </button>
-              <button
-                type="button"
-                onClick={nextProject}
-                aria-label="Next featured project"
-                style={{
-                  background: "rgba(255,255,255,0.12)",
-                  color: "#fff",
-                  border: "1px solid rgba(255,255,255,0.2)",
-                  padding: "6px 12px",
-                  cursor: "pointer",
-                  fontSize: "12px",
-                  fontFamily: "var(--mono)",
-                  clipPath: "var(--px-s)",
-                  transition: "background 0.2s",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.25)")}
-                onMouseLeave={(e) => (e.currentTarget.style.background = "rgba(255,255,255,0.12)")}
-              >
-                Next →
-              </button>
-            </div>
-          </div>
-          <h2>{current.title}</h2>
-          <p>{current.description}</p>
-          <div className="split">
+        <div className="copy">
+          <h2 className="typeWrap">
+            <span className="typeGhost">{current.title}</span>
+            <span className="typeLine">
+              {title.shown}
+              {!title.done && <i className="caret" />}
+            </span>
+          </h2>
+
+          <p className="kick">
+            <i className="kdot" />
+            Featured project {index + 1}/{projects.length}
+          </p>
+
+          <p className="typeWrap desc">
+            <span className="typeGhost">{current.description}</span>
+            <span className="typeLine">
+              {description.shown}
+              {title.done && !description.done && <i className="caret" />}
+            </span>
+          </p>
+
+          <ul key={current.title} className="featFade bullets">
             {current.meta.map((m) => (
-              <div key={m.label}>
+              <li key={m.label}>
                 <span className="lb">{m.label}</span>
-                <span className="vl">{m.value}</span>
-              </div>
+                {m.value}
+              </li>
             ))}
-          </div>
-          <div style={{ display: "flex", gap: "12px", marginTop: "30px", flexWrap: "wrap", alignItems: "center" }}>
-            <a className="btn" href={current.href} target="_blank" rel="noopener noreferrer" style={{ marginTop: 0 }}>
+          </ul>
+
+          <div className="foot">
+            <button
+              type="button"
+              className="arrow"
+              onClick={() => go(-1)}
+              aria-label="Previous featured project"
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              className="arrow"
+              onClick={() => go(1)}
+              aria-label="Next featured project"
+            >
+              →
+            </button>
+            <a
+              className="btn"
+              href={current.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Open the live site
             </a>
-            <div style={{ display: "flex", gap: "6px", marginLeft: "auto" }}>
-              {projects.map((p, i) => (
-                <button
-                  key={p.title}
-                  type="button"
-                  onClick={() => setIndex(i)}
-                  aria-label={`Select ${p.title}`}
-                  style={{
-                    width: i === index ? "24px" : "8px",
-                    height: "8px",
-                    background: i === index ? "var(--neon)" : "rgba(255,255,255,0.3)",
-                    border: "none",
-                    padding: 0,
-                    cursor: "pointer",
-                    transition: "all 0.3s ease",
-                    clipPath: "var(--px-s)",
-                  }}
-                />
-              ))}
-            </div>
           </div>
+        </div>
+
+        <div className="media">
+          {projects.map((p, i) => {
+            const o = offset(i);
+            return (
+              <button
+                key={p.image}
+                type="button"
+                className="card"
+                aria-label={`Show ${p.title}`}
+                aria-current={i === index}
+                onClick={() => setIndex(i)}
+                style={
+                  {
+                    "--o": o,
+                    "--a": Math.abs(o),
+                    zIndex: projects.length - Math.abs(o),
+                  } as React.CSSProperties
+                }
+              >
+                <Image
+                  src={p.image}
+                  alt={`${p.title} screenshot`}
+                  fill
+                  sizes="(min-width: 880px) 600px, 100vw"
+                  priority={i === 0}
+                />
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>

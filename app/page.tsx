@@ -188,7 +188,40 @@ export default function Home() {
                 same on a bad connection as on a good one.
               </p>
             </div>
-            <QuotePixels />
+
+            <aside className="hire" data-reveal>
+              <QuotePixels />
+              <p className="havail">
+                <i className="hdot" />
+                Open to new opportunities
+              </p>
+              <div className="hgrid">
+                <div>
+                  <span className="hn">{new Date().getFullYear() - 2022}+</span>
+                  <span className="hl">Years shipping code</span>
+                </div>
+                <div>
+                  <span className="hn">{projects.length}</span>
+                  <span className="hl">Products live</span>
+                </div>
+                <div>
+                  <span className="hn">Jakarta</span>
+                  <span className="hl">On-site or remote</span>
+                </div>
+                <div>
+                  <span className="hn">Fullstack</span>
+                  <span className="hl">React · Go · Node</span>
+                </div>
+              </div>
+              <div className="hcta">
+                <a className="btn" href={site.cv} target="_blank" rel="noopener noreferrer">
+                  Download CV
+                </a>
+                <a className="hmail" href={`mailto:${site.email}`}>
+                  {site.email}
+                </a>
+              </div>
+            </aside>
           </div>
         </section>
 

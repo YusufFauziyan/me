@@ -20,7 +20,10 @@ const LIT: [number, string][] = [
 // on containers, not on exact tags — a bare tag test flickers every time the
 // pointer crosses the margin between two paragraphs.
 const COPY = "p, h1, h2, h3, li, a, button, .wrap, .masthead, .track, .donuts";
-const BRUSH = 5; // blob radius in cells; small enough to read as a cursor, not a cloud
+// Dark blocks. The ambient bands bottom out at a near-black navy that vanishes
+// on them, so over these the cursor always uses the bright LIT palette.
+const DARK = ".feat, .quote";
+const BRUSH = 3; // blob radius in cells; small enough to read as a cursor, not a cloud
 
 /**
  * The pixel field behind the page: a low-frequency noise field that only
@@ -45,7 +48,7 @@ export default function HeroCanvas() {
     let W = 0, H = 0, cols = 0, rows = 0, t = 0, raf = 0, intro = 0;
     let heat = new Float32Array(0);
     let mx = -1e4, my = -1e4, pmx = -1e4, pmy = -1e4;
-    let lit = false, shake = 0;
+    let lit = false, dark = false, shake = 0;
     // Click shockwaves: expanding rings of pixels. Capped so a mash of clicks
     // can't stack into a full-screen repaint every frame.
     const waves: { x: number; y: number; t0: number; pow: number }[] = [];
@@ -123,6 +126,7 @@ export default function HeroCanvas() {
       my = e.clientY;
       const el = e.target as HTMLElement | null;
       lit = !!el?.closest?.(COPY);
+      dark = !!el?.closest?.(DARK);
     };
     // Double-click only. A single click is left alone so ordinary clicking
     // around the page doesn't set the whole screen off.
@@ -257,9 +261,9 @@ export default function HeroCanvas() {
           // Higher cut than the base layer: the ring leaves a slowly decaying
           // wash behind it, which on `screen` would flood the card instead of
           // reading as a ring.
-          if (v < 0.46) continue;
+          if (v < (dark ? 0.36 : 0.46)) continue;
           let col: string;
-          if (lit) {
+          if (lit || dark) {
             col = v >= LIT[1][0] ? LIT[1][1] : LIT[0][1];
           } else {
             col = BANDS[0][1];
