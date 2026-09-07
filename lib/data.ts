@@ -13,7 +13,7 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/yusuffauziyan",
   cv:
     process.env.NEXT_PUBLIC_CV_URL ||
-    "https://drive.google.com/file/d/1YiEvdg_OlaoFEpbC2obQVXsK7B20pPMy/view?usp=sharing",
+    "https://drive.google.com/file/d/1x-9E0i_cA7wD1At_P9d6szPB4iJ6GqJU/view?usp=sharing",
   // Set NEXT_PUBLIC_SITE_URL in production so OG images and the sitemap use absolute URLs.
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://yusuffauziyan.vercel.app",
 };
